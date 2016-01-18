@@ -45,6 +45,7 @@ a:hover {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   font-size: 0px;
+  margin-top: 20px;
 }
 .pixel {
   transition: background-color 0.3s ease;
