@@ -6,6 +6,7 @@ window.onload = function() {
   var pixelsPerHeight = resolution.value;
   var pixels = [];
   var isAnimating = false;
+  var animationTimeout, animationFrame;
 
   setupCanvasSmoothing();
 
@@ -14,8 +15,6 @@ window.onload = function() {
     pixelsPerHeight = Math.floor(pixelsPerWidth * ratio);
     canvas.width = 400;
     canvas.height = 400 * ratio;
-    console.log('img: ', img.height, img.width);
-    console.log('canvas: ', canvas.height, canvas.width);
 
     container.style.width = canvas.width +'px';
     container.style.height = canvas.height +'px';
@@ -146,7 +145,7 @@ window.onload = function() {
   }
 
   function cancelAnimate() {
-    if (!isAnimating)
+    if (!animationTimeout || !animationFrame)
       return;
     clearTimeout(animationTimeout);
     window.cancelAnimationFrame(animationFrame);
