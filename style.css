@@ -82,6 +82,7 @@ a:hover {
   display: block;
   width: 100%;
   padding: 5px 20px;
+  cursor: pointer;
 }
 
 .file input {
@@ -99,7 +100,7 @@ a:hover {
 }
 
 .numbers {
-  margin-top: 10px;
+  float: right;
 }
 
 .counter {

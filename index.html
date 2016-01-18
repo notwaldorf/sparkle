@@ -17,18 +17,18 @@
     <div class="content">
 
       <div class="file">
+        <label for="loader">Upload an image</label>
         <input type="file" id="loader"/>
-        <label>Upload an image</label>
+        <span id="filename" class="text">[using the default]</span>
       </div>
-      <span id="filename" class="text">[using the default]</span>
 
       <div class="numbers">
-        <button class="minus" tabindex="0" id="minus">–</button>
-        <input class="counter" type="text" value="30" tabindex="-1" id="resolution">
-        <button class="plus" tabindex="0" id="plus">+</button>
-      </div>
-      <span class="text">pixels per side</span>
-
+        <div>
+          <button class="minus" tabindex="0" id="minus">–</button>
+          <input class="counter" type="text" value="30" tabindex="-1" id="resolution">
+          <button class="plus" tabindex="0" id="plus">+</button>
+        </div>
+        <div class="text">pixels per side</div>
       </div>
     </div>
 
