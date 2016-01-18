@@ -45,6 +45,8 @@ a:hover {
   color: #34495E;
   font-weight: bold;
   padding: 0;
+  font-size: 12px;
+  letter-spacing: 1px;
 }
 
 .container {

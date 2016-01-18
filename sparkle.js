@@ -120,7 +120,7 @@ window.onload = function() {
 
   function animate() {
     animationTimeout = setTimeout(function() {
-    animationFrame = window.requestAnimationFrame(animate);
+      animationFrame = window.requestAnimationFrame(animate);
     }, 0.1);
 
     // Style 20% of the pixels.
@@ -129,6 +129,13 @@ window.onload = function() {
       var which = Math.floor(Math.random() * pixels.length);
       var opacity = (Math.floor(Math.random() * 5) + 6 ) / 10;
       pixels[which].style.opacity = opacity;
+
+      // zoom them in a bit too!
+      if (pixels[which].style.transform === '') {
+        pixels[which].style.transform = 'scale(1.1, 1.1)';
+      } else {
+        pixels[which].style.transform = '';
+      }
     }
   }
 
