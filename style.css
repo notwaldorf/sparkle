@@ -1,0 +1,38 @@
+body {
+  font-family: 'Lato', 'Helvetica', sans-serif;
+}
+.title {
+  font-family: 'Pacifico';
+  font-size: 70px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.container {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  font-size: 0px;
+}
+.pixel {
+  transition: background-color 0.3s ease;
+}
+.footer {
+  font-family: 'Lato', 'Helvetica', sans-serif;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 50px auto 0 auto;
+  padding-top: 10px;
+  border-top: 2px solid #E91E63;
+  width: 400px;
+}
