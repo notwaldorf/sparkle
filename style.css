@@ -6,10 +6,14 @@ body {
   font-size: 70px;
   letter-spacing: 2px;
   text-align: center;
+  color: #23C8B9;
 }
+
 .content {
+  position: relative;
   max-width: 400px;
   margin: 0 auto;
+  text-align: center;
 }
 .container {
   display: -ms-flexbox;
@@ -33,6 +37,36 @@ body {
   letter-spacing: 2px;
   margin: 50px auto 0 auto;
   padding-top: 10px;
-  border-top: 2px solid #E91E63;
+  border-top: 2px solid #23C8B9;
   width: 400px;
+}
+
+.file {
+  position: relative;
+  width: 300px;
+  display: inline-block;
+}
+.file label {
+  background: #23C8B9;
+  padding: 5px 20px;
+  color: white;
+  font-weight: bold;
+  transition: all .4s;
+}
+.file input {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  top: 0;
+  opacity: 0.01;
+  cursor: pointer;
+}
+.file input:hover + label,
+.file input:focus + label {
+  background: #FF862D;
+  color: white;
+}
+
+#filename {
+  margin-top: 5px;
 }
