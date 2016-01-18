@@ -61,7 +61,7 @@ a:hover {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
-  flex-direction: column
+  flex-direction: column;
   -ms-flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -156,6 +156,8 @@ a:hover {
   flex: 1;
   -webkit-flex-basis: 0.000000001px;
   flex-basis: 0.000000001px;
+  /* FF has a giant min-width for inputs */
+  min-width: 0px;
 }
 
 .minus:active, .plus:active,
