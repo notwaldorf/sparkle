@@ -16,11 +16,17 @@ a:hover {
 
 .title {
   font-family: 'Pacifico';
-  font-size: 70px;
+  font-size: 4.3em;
   letter-spacing: 2px;
   text-align: center;
   color: #23C8B9;
   margin: 20px 0;
+}
+
+@media all and (max-width: 400px) {
+  .title {
+    font-size: 3.0em;
+  }
 }
 
 .content {
@@ -39,6 +45,7 @@ a:hover {
   -ms-flex-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  max-width: 100%;
 }
 
 .text {
@@ -71,25 +78,25 @@ a:hover {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 50px auto 0 auto;
+  margin: 50px auto;
   padding-top: 10px;
   border-top: 2px solid #23C8B9;
-  width: 400px;
+  max-width: 400px;
 }
 
 .file, .numbers {
   position: relative;
-  width: 150px;
+  max-width: 150px;
   display: inline-block;
   text-align: center;
 }
 
 .file, .file > .text {
-  width: 150px;
+  max-width: 150px;
 }
 
 .numbers, .numbers > .text {
-  width: 100px;
+  max-width: 100px;
 }
 
 .file label, .plus, .minus, button {
@@ -106,7 +113,13 @@ a:hover {
   border-radius: 2px;
   text-transform: uppercase;
   vertical-align: middle;
-  font-size: 13px;
+  font-size: 0.8em;
+}
+
+@media all and (max-width: 400px) {
+  .file label, .plus, .minus, button{
+    font-size: 0.6em;
+  }
 }
 
 .file label {
