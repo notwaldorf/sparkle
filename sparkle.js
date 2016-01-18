@@ -111,7 +111,7 @@ window.onload = function() {
   });
 
   function resetState() {
-    updateResolution(60);
+    updateResolution(30);
     img.src = 'http://i.imgur.com/n95hZmA.jpg';
     filename.innerHTML = '[using the default]';
     cancelAnimate();
