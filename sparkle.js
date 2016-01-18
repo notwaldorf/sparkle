@@ -2,19 +2,29 @@ window.onload = function() {
   // Yay for lazy coding and globals! >.<
   var img = document.createElement('img');
   var ctx = canvas.getContext('2d');
-  var pixelsPerSide = resolution.value;
+  var pixelsPerWidth = resolution.value;
+  var pixelsPerHeight = resolution.value;
   var pixels = [];
   var isAnimating = false;
 
   setupCanvasSmoothing();
 
   img.addEventListener('load', function(e) {
+    var ratio = img.height / img.width;
+    pixelsPerHeight = Math.floor(pixelsPerWidth * ratio);
+    canvas.width = 400;
+    canvas.height = 400 * ratio;
+    console.log('img: ', img.height, img.width);
+    console.log('canvas: ', canvas.height, canvas.width);
+
+    container.style.width = canvas.width +'px';
+    container.style.height = canvas.height +'px';
     displayPixelatedImage();
   });
 
   // Start off with a default image.
   img.crossOrigin = '';
-  img.src = 'http://i.imgur.com/RbzVCZI.png';
+  resetState();
 
   function displayPixelatedImage() {
     pixelateCanvasImage();
@@ -23,10 +33,8 @@ window.onload = function() {
 
     // Remove the previous render and redisplay the new image.
     container.innerHTML = '';
-
-    var size = canvas.width / pixelsPerSide;
     for (var i = 0; i < pixelColors.length; i++) {
-      pixels.push(drawPixel(pixelColors[i], size));
+      pixels.push(drawPixel(pixelColors[i], canvas.width / pixelsPerWidth, canvas.height / pixelsPerHeight));
     }
   }
 
@@ -41,14 +49,11 @@ window.onload = function() {
   }
 
   function pixelateCanvasImage() {
-    var thumbWidth = pixelsPerSide;
-    var thumbHeight = pixelsPerSide
-
     // Draw the image super tiny and then scale it from the tiny size
     // to the actual canvas size, which pixellates it.
-    ctx.drawImage(img, 0, 0, thumbWidth, thumbHeight);
+    ctx.drawImage(img, 0, 0, pixelsPerWidth, pixelsPerHeight);
     ctx.drawImage(canvas,
-                 0, 0, thumbWidth, thumbHeight, /* source */
+                 0, 0, pixelsPerWidth, pixelsPerHeight, /* source */
                  0, 0, canvas.width, canvas.height /* dest */);
   }
 
@@ -59,15 +64,12 @@ window.onload = function() {
     }
 
     var colors = []
-    var width = canvas.width;
 
     // How many original pixels we have in a "drawn" final pixel.
-    var distancePerPixel = width / pixelsPerSide;
-
-    for (var i = 0; i < pixelsPerSide; i++) {
-      for (var j = 0; j < pixelsPerSide; j++) {
-        var x = distancePerPixel * i + 1;
-        var y = distancePerPixel * j + 1;
+    for (var i = 0; i < pixelsPerWidth; i++) {
+      for (var j = 0; j < pixelsPerHeight; j++) {
+        var x = canvas.width / pixelsPerWidth * i + 1;
+        var y = canvas.height / pixelsPerHeight * j + 1;
 
         var pixel = ctx.getImageData(x, y, 1, 1);
         var rgba = getRGBA(pixel.data);
@@ -97,12 +99,7 @@ window.onload = function() {
     updateResolution(value < 300 ? value + 10 : 300);
   });
 
-  reset.addEventListener('click', function() {
-    updateResolution(30);
-    img.src = 'http://i.imgur.com/RbzVCZI.png';
-    filename.innerHTML = '[using the default]';
-    cancelAnimate();
-  });
+  reset.addEventListener('click', resetState);
 
   sparkle.addEventListener('click', function() {
     isAnimating = !isAnimating;
@@ -113,8 +110,17 @@ window.onload = function() {
     }
   });
 
+  function resetState() {
+    updateResolution(60);
+    img.src = 'http://i.imgur.com/n95hZmA.jpg';
+    filename.innerHTML = '[using the default]';
+    cancelAnimate();
+  };
+
   function updateResolution(value) {
-    resolution.value = pixelsPerSide = value;
+    resolution.value = pixelsPerWidth = value;
+    var ratio = img.height / img.width;
+    pixelsPerHeight = Math.ceil(pixelsPerWidth * ratio);
     displayPixelatedImage();
   }
 
@@ -140,6 +146,8 @@ window.onload = function() {
   }
 
   function cancelAnimate() {
+    if (!isAnimating)
+      return;
     clearTimeout(animationTimeout);
     window.cancelAnimationFrame(animationFrame);
     isAnimating = false;
@@ -151,8 +159,5 @@ window.onload = function() {
     ctx.webkitImageSmoothingEnabled = false;
     ctx.msImageSmoothingEnabled = false;
     ctx.imageSmoothingEnabled = false;
-
-    container.style.width = canvas.width +'px';
-    container.style.height = canvas.height +'px';
   }
 };
