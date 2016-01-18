@@ -12,18 +12,28 @@
     <script src="./sparkle.js"></script>
   </head>
   <body>
-    <p class="title">✨sparkle ✨</p>
+    <div class="title">✨sparkle ✨</div>
 
     <div class="content">
+
       <div class="file">
         <input type="file" id="loader"/>
-        <label for="loader">Upload your image</label>
-        <div id="filename"></div>
+        <label>Upload an image</label>
+      </div>
+      <span id="filename" class="text">[using the default]</span>
+
+      <div class="numbers">
+        <button class="minus" tabindex="0" id="minus">–</button>
+        <input class="counter" type="text" value="30" tabindex="-1" id="resolution">
+        <button class="plus" tabindex="0" id="plus">+</button>
+      </div>
+      <span class="text">pixels per side</span>
+
       </div>
     </div>
 
     <div class="footer">
-      <p>made with <span style="color:#E91E63">❤︎</span> by <a href="https://twitter.com/notwaldorf">monica</a>.
+      <p>made with <span style="color:#23C8B9">❤︎</span> by <a href="https://twitter.com/notwaldorf">monica</a>.
       find this on <a href="https://github.com/notwaldorf/sparkle">github</a></p>
     </div>
   </body>

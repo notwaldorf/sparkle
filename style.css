@@ -1,20 +1,40 @@
 body {
   font-family: 'Lato', 'Helvetica', sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+a:link, a:visited {
+  color: #23C8B9;
+  text-decoration: none;
+}
+a:hover {
+  color: #FF862D;
+}
+
 .title {
   font-family: 'Pacifico';
   font-size: 70px;
   letter-spacing: 2px;
   text-align: center;
   color: #23C8B9;
+  margin: 20px 0;
 }
 
 .content {
   position: relative;
   max-width: 400px;
   margin: 0 auto;
-  text-align: center;
 }
+
+.text {
+  color: #34495E;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
 .container {
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -29,6 +49,7 @@ body {
 .pixel {
   transition: background-color 0.3s ease;
 }
+
 .footer {
   font-family: 'Lato', 'Helvetica', sans-serif;
   font-size: 12px;
@@ -41,32 +62,78 @@ body {
   width: 400px;
 }
 
-.file {
+.file, .numbers {
   position: relative;
-  width: 300px;
+  width: 170px;
   display: inline-block;
+  text-align: center;
 }
-.file label {
+
+.file label, .plus, .minus {
   background: #23C8B9;
-  padding: 5px 20px;
   color: white;
   font-weight: bold;
   transition: all .4s;
+  height: 30px;
+  border-radius: 2px;
 }
+
+.file label {
+  display: block;
+  width: 100%;
+  padding: 5px 20px;
+}
+
 .file input {
-  position: absolute;
-  display: inline-block;
-  left: 0;
-  top: 0;
-  opacity: 0.01;
+  width: 0;
+  height: 0;
+  opacity: 0;
   cursor: pointer;
 }
+
 .file input:hover + label,
 .file input:focus + label {
+  outline: none;
   background: #FF862D;
   color: white;
 }
 
-#filename {
-  margin-top: 5px;
+.numbers {
+  margin-top: 10px;
+}
+
+.counter {
+  text-align: center;
+  outline: none;
+  margin: 0;
+  pointer-events: none;
+  border: none;
+  width: 102px;
+}
+
+.minus, .plus {
+  user-select: none;
+  width: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.minus:active, .plus:active,
+.minus:hover, .plus:hover,
+.minus:focus, .plus:focus {
+  outline: none;
+  background: #FF862D;
+  outline: none;
+}
+
+.minus {
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+}
+
+.plus {
+  border-left: none;
+  border-radius: 0 2px 2px 0;
 }

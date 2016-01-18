@@ -10,4 +10,14 @@ window.onload = function() {
     }
     reader.readAsDataURL(e.target.files[0]);
   }, false);
+
+  minus.addEventListener('click', function() {
+    var value = parseInt(resolution.value);
+    resolution.value = value > 10 ? value - 10 : 0;
+  });
+
+  plus.addEventListener('click', function() {
+    var value = parseInt(resolution.value);
+    resolution.value = value < 300 ? value + 10 : 300;
+  });
 };
