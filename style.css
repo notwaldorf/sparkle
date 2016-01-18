@@ -29,10 +29,22 @@ a:hover {
   margin: 0 auto;
 }
 
+.horizontal {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
 .text {
   color: #34495E;
   font-weight: bold;
-  margin-left: 10px;
+  padding: 0;
 }
 
 .container {
@@ -65,24 +77,41 @@ a:hover {
 
 .file, .numbers {
   position: relative;
-  width: 170px;
+  width: 150px;
   display: inline-block;
   text-align: center;
 }
 
-.file label, .plus, .minus {
+.file, .file > .text {
+  width: 150px;
+}
+
+.numbers, .numbers > .text {
+  width: 100px;
+}
+
+.file label, .plus, .minus, button {
+  user-select: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
   background: #23C8B9;
   color: white;
-  font-weight: bold;
+  font-weight: normal;
   transition: all .4s;
   height: 30px;
   border-radius: 2px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-size: 13px;
 }
 
 .file label {
   display: block;
   width: 100%;
-  padding: 5px 20px;
+  padding: 0 10px;
+  line-height: 30px;
   cursor: pointer;
 }
 
@@ -91,6 +120,7 @@ a:hover {
   height: 0;
   opacity: 0;
   cursor: pointer;
+  display: none;
 }
 
 .file input:hover + label,
@@ -100,26 +130,17 @@ a:hover {
   color: white;
 }
 
-.numbers {
-  float: right;
-}
-
 .counter {
   text-align: center;
   outline: none;
   margin: 0;
   pointer-events: none;
-  border: none;
-  width: 102px;
-}
-
-.minus, .plus {
-  user-select: none;
-  width: 30px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
+  border: 1px solid #23C8B9;
+  -ms-flex: 1 1 0.000000001px;
+  -webkit-flex: 1;
+  flex: 1;
+  -webkit-flex-basis: 0.000000001px;
+  flex-basis: 0.000000001px;
 }
 
 .minus:active, .plus:active,
@@ -133,9 +154,17 @@ a:hover {
 .minus {
   border-right: none;
   border-radius: 2px 0 0 2px;
+  width: 30px;
 }
 
 .plus {
   border-left: none;
   border-radius: 0 2px 2px 0;
+  width: 30px;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

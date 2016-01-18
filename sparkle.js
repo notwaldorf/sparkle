@@ -8,7 +8,6 @@ window.onload = function() {
   setupCanvasSmoothing();
 
   img.addEventListener('load', function(e) {
-    debugger
     displayPixelatedImage();
   });
 
@@ -82,24 +81,31 @@ window.onload = function() {
     var reader = new FileReader();
     reader.onload = function(event){
       img.src = event.target.result;
-      document.getElementById('filename').innerHTML = e.target.files[0].name;
+      filename.innerHTML = e.target.files[0].name;
     }
     reader.readAsDataURL(e.target.files[0]);
   }, false);
 
   minus.addEventListener('click', function() {
     var value = parseInt(resolution.value);
-    resolution.value = value > 10 ? value - 10 : 0;
-    pixelsPerSide = resolution.value;
-    displayPixelatedImage();
+    updateResolution(value > 10 ? value - 10 : 0);
   });
 
   plus.addEventListener('click', function() {
     var value = parseInt(resolution.value);
-    resolution.value = value < 300 ? value + 10 : 300;
-    pixelsPerSide = resolution.value;
-    displayPixelatedImage();
+    updateResolution(value < 300 ? value + 10 : 300);
   });
+
+  reset.addEventListener('click', function() {
+    updateResolution(30);
+    img.src = 'http://i.imgur.com/RbzVCZI.png';
+    filename.innerHTML = '[using the default]';
+  });
+
+  function updateResolution(value) {
+    resolution.value = pixelsPerSide = value;
+    displayPixelatedImage();
+  }
 
   function setupCanvasSmoothing() {
     // from https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled

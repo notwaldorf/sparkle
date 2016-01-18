@@ -16,21 +16,25 @@
 
     <div class="content">
 
-      <div class="file">
-        <label for="loader">Upload an image</label>
-        <input type="file" id="loader"/>
-        <span id="filename" class="text">[using the default]</span>
-      </div>
-
-      <div class="numbers">
-        <div>
-          <button class="minus" tabindex="0" id="minus">–</button>
-          <input class="counter" type="text" value="30" tabindex="-1" id="resolution">
-          <button class="plus" tabindex="0" id="plus">+</button>
+      <div class="horizontal">
+        <div class="file">
+          <label for="loader">Upload an image</label>
+          <input type="file" id="loader"/>
+          <div id="filename" class="text truncate">[using the default]</div>
         </div>
-        <div class="text">pixels per side</div>
-      </div>
 
+        <div class="numbers">
+          <div class="horizontal">
+            <button class="minus" tabindex="0" id="minus">–</button>
+            <input class="counter" type="text" value="30" tabindex="-1" id="resolution">
+            <button class="plus" tabindex="0" id="plus">+</button>
+          </div>
+          <div class="text">pixels per side</div>
+        </div>
+
+        <button id="reset">reset</button>
+        <button id="animate">animate</button>
+      </div>
       <div class="container" id="container"></div>
     </div>
 
