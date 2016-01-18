@@ -14,8 +14,7 @@ window.onload = function() {
     var ratio = img.height / img.width;
     pixelsPerHeight = Math.floor(pixelsPerWidth * ratio);
     canvas.width = 400;
-    canvas.height = 400 * ratio;
-
+    canvas.height = Math.ceil(400 * ratio);
     container.style.width = canvas.width +'px';
     container.style.height = canvas.height +'px';
     displayPixelatedImage();
@@ -119,7 +118,7 @@ window.onload = function() {
   function updateResolution(value) {
     resolution.value = pixelsPerWidth = value;
     var ratio = img.height / img.width;
-    pixelsPerHeight = Math.ceil(pixelsPerWidth * ratio);
+    pixelsPerHeight = Math.floor(pixelsPerWidth * ratio);
     displayPixelatedImage();
   }
 
