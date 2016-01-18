@@ -4,6 +4,7 @@ window.onload = function() {
   var ctx = canvas.getContext('2d');
   var pixelsPerSide = resolution.value;
   var pixels = [];
+  var isAnimating = false;
 
   setupCanvasSmoothing();
 
@@ -100,11 +101,41 @@ window.onload = function() {
     updateResolution(30);
     img.src = 'http://i.imgur.com/RbzVCZI.png';
     filename.innerHTML = '[using the default]';
+    cancelAnimate();
+  });
+
+  sparkle.addEventListener('click', function() {
+    isAnimating = !isAnimating;
+    if (isAnimating) {
+      animate();
+    } else {
+      cancelAnimate();
+    }
   });
 
   function updateResolution(value) {
     resolution.value = pixelsPerSide = value;
     displayPixelatedImage();
+  }
+
+  function animate() {
+    animationTimeout = setTimeout(function() {
+    animationFrame = window.requestAnimationFrame(animate);
+    }, 0.1);
+
+    // Style 20% of the pixels.
+    var howMany = 0.02 * pixels.length;
+    for (var i = 0; i < howMany; i++) {
+      var which = Math.floor(Math.random() * pixels.length);
+      var opacity = (Math.floor(Math.random() * 5) + 6 ) / 10;
+      pixels[which].style.opacity = opacity;
+    }
+  }
+
+  function cancelAnimate() {
+    clearTimeout(animationTimeout);
+    window.cancelAnimationFrame(animationFrame);
+    isAnimating = false;
   }
 
   function setupCanvasSmoothing() {
