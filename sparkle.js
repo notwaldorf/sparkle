@@ -8,15 +8,12 @@ window.onload = function() {
   var isAnimating = false;
   var animationTimeout, animationFrame;
 
+  var canvasWidth = 400;
+
   setupCanvasSmoothing();
 
   img.addEventListener('load', function(e) {
-    var ratio = img.height / img.width;
-    pixelsPerHeight = Math.floor(pixelsPerWidth * ratio);
-    canvas.width = 400;
-    canvas.height = Math.ceil(400 * ratio);
-    container.style.width = canvas.width +'px';
-    container.style.height = canvas.height +'px';
+    calculateImageRatio();
     displayPixelatedImage();
   });
 
@@ -87,14 +84,28 @@ window.onload = function() {
     reader.readAsDataURL(e.target.files[0]);
   }, false);
 
-  minus.addEventListener('click', function() {
+  resolutionMinus.addEventListener('click', function() {
     var value = parseInt(resolution.value);
     updateResolution(value > 10 ? value - 10 : 0);
   });
 
-  plus.addEventListener('click', function() {
+  resolutionPlus.addEventListener('click', function() {
     var value = parseInt(resolution.value);
     updateResolution(value < 300 ? value + 10 : 300);
+  });
+
+  widthMinus.addEventListener('click', function() {
+    var value = parseInt(width.value);
+    width.value = canvasWidth = value > 10 ? value - 10 : 0;
+    calculateImageRatio();
+    displayPixelatedImage();
+  });
+
+  widthPlus.addEventListener('click', function() {
+    var value = parseInt(width.value);
+    width.value = canvasWidth = value < 800 ? value + 10 : 800;
+    calculateImageRatio();
+    displayPixelatedImage();
   });
 
   reset.addEventListener('click', resetState);
@@ -120,6 +131,15 @@ window.onload = function() {
     var ratio = img.height / img.width;
     pixelsPerHeight = Math.floor(pixelsPerWidth * ratio);
     displayPixelatedImage();
+  }
+
+  function calculateImageRatio() {
+    var ratio = img.height / img.width;
+    pixelsPerHeight = Math.floor(pixelsPerWidth * ratio);
+    canvas.width = canvasWidth;
+    canvas.height = Math.ceil(canvasWidth * ratio);
+    container.style.width = canvas.width +'px';
+    container.style.height = canvas.height +'px';
   }
 
   function animate() {
