@@ -19,7 +19,9 @@ window.onload = function() {
 
   // Start off with a default image.
   img.crossOrigin = '';
-  resetState();
+  width.value = canvasWidth = 400;
+  img.src = 'http://i.imgur.com/n95hZmA.jpg';
+  filename.innerHTML = '[using the default]';
 
   function displayPixelatedImage() {
     pixelateCanvasImage();
