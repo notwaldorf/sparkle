@@ -120,6 +120,8 @@ window.onload = function() {
   });
 
   function resetState() {
+    width.value = canvasWidth = 400;
+    calculateImageRatio();
     updateResolution(30);
     img.src = 'http://i.imgur.com/n95hZmA.jpg';
     filename.innerHTML = '[using the default]';
