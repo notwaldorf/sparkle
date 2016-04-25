@@ -5,6 +5,7 @@ window.onload = function() {
   var pixelsPerWidth = resolution.value;
   var pixelsPerHeight = resolution.value;
   var pixels = [];
+  var imageData = null;
   var isAnimating = false;
   var animationTimeout, animationFrame;
 
@@ -24,15 +25,23 @@ window.onload = function() {
   filename.innerHTML = '[using the default]';
 
   function displayPixelatedImage() {
+    if(!canvas.width || !canvas.height) {
+      return;
+    }
+
     pixelateCanvasImage();
 
     var pixelColors = getPixelColors();
 
     // Remove the previous render and redisplay the new image.
     container.innerHTML = '';
+    var fragment = document.createDocumentFragment();
     for (var i = 0; i < pixelColors.length; i++) {
-      pixels.push(drawPixel(pixelColors[i], canvas.width / pixelsPerWidth, canvas.height / pixelsPerHeight));
+      var pixel = drawPixel(pixelColors[i], canvas.width / pixelsPerWidth, canvas.height / pixelsPerHeight);
+      pixels.push(pixel);
+      fragment.appendChild(pixel);
     }
+    container.appendChild(fragment);
   }
 
   function drawPixel(rgba, size) {
@@ -41,7 +50,6 @@ window.onload = function() {
     pixel.style.width = pixel.style.height = size + 'px';
 
     pixel.style.backgroundColor = rgba;
-    container.appendChild(pixel);
     return pixel;
   }
 
@@ -52,6 +60,7 @@ window.onload = function() {
     ctx.drawImage(canvas,
                  0, 0, pixelsPerWidth, pixelsPerHeight, /* source */
                  0, 0, canvas.width, canvas.height /* dest */);
+    imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   }
 
   function getPixelColors() {
@@ -60,16 +69,18 @@ window.onload = function() {
               ',' + data[2] + ',' + data[3] + ')';
     }
 
-    var colors = []
+    var colors = [];
+    var widthRatio = canvas.width / pixelsPerWidth;
+    var heightRatio = canvas.height / pixelsPerHeight;
 
     // How many original pixels we have in a "drawn" final pixel.
     for (var i = 0; i < pixelsPerWidth; i++) {
       for (var j = 0; j < pixelsPerHeight; j++) {
-        var x = canvas.width / pixelsPerWidth * i + 1;
-        var y = canvas.height / pixelsPerHeight * j + 1;
+        var x = Math.round(widthRatio * i + 1) * 4;
+        var y = Math.round(heightRatio * j + 1) * canvas.width * 4;
 
-        var pixel = ctx.getImageData(x, y, 1, 1);
-        var rgba = getRGBA(pixel.data);
+        var pixel = [imageData.data[y + x], imageData.data[y + x + 1], imageData.data[y + x + 2], imageData.data[y + x + 3]];
+        var rgba = getRGBA(pixel);
 
         colors.push(rgba);
       }
