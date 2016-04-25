@@ -48,6 +48,16 @@ a:hover {
   max-width: 100%;
 }
 
+.wrap {
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  -ms-flex-pack: distribute;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
 .text {
   color: #34495E;
   font-weight: bold;
